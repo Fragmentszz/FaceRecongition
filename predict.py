@@ -10,14 +10,17 @@ from publicmodule import *
 
 
 if __name__ == '__main__':
-    img = cv2.imread("./imgs/Test/ori/i025qa-mn.jpg")
+    img = cv2.imread("./imgs/Test/i701_4.jpg")
+    t = int(500.0 / (1.0*img.shape[1]) * img.shape[0])
+    print(t)
+    img = cv2.resize(img,(500,t))
     model = BPNNModel()
     model.load_state_dict(torch.load("./bp_model"))
     model.eval()
-    namelists = pd.read_excel("./namedic.xlsx","Sheet1")
-    namedic = {}
-    for namelist in namelists:
-        namedic[namelist[0]] = namelist[1]
+    namelists = pd.read_excel("./namedic.xlsx","Sheet1",dtype=str,index_col=None)
+    namedic = []
+    for row in namelists["name"]:
+        namedic.append(str(row))
     print(namedic)
     traits_Vector = np.load("V_final.npy")
     dstd = np.load("dstd.npy")

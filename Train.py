@@ -47,7 +47,7 @@ if __name__ == '__main__':
     model.layer1 = nn.Sequential(nn.Linear(dim, 200), nn.ReLU())
     model.layer2 = nn.Sequential(nn.Linear(200, 350), nn.ReLU())
     model.layer3 = nn.Sequential(nn.Linear(350, 500), nn.ReLU())
-    model.layer4 = nn.Sequential(nn.Linear(500, cato))
+    model.layer4 = nn.Sequential(nn.Linear(500, cato+3))
     # 打印出整个模型
     print(model)
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     model = model.double()
     # 创建四个Sequential对象，Sequential是一个时序容器，将里面的小的模型按照序列建立网络
 
-    for e in range(100):
+    for e in range(20):
         # 4.1==========================训练模式==========================
         train_loss = 0
         train_acc = 0

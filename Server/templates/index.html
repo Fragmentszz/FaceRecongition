@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Face Recognition App</title>
+</head>
+<body>
+    <h1>Upload an Image for Face Recognition</h1>
+
+    <!-- 上传图片的表单 -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    <!-- 显示处理后的图片 -->
+    <div id="image-container" style="margin-top: 20px;">
+        <h2>Processed Image:</h2>
+        <!-- 这里将显示处理后的图片 -->
+    </div>
+
+    <script>
+        // 防止表单提交后页面刷新
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(event.target);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 显示处理后的图片
+                var img = new Image();
+                img.src = data.path; // 假设 Flask 返回的 JSON 包含图片路径
+                img.alt = 'Processed Image';
+                document.getElementById('image-container').appendChild(img);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

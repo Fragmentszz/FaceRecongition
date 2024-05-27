@@ -1,2 +1,7 @@
 imgs/
 *.npy
+Server/uploads/*.jpg
+Server/static/processed/*.jpg
+__pycache__/
+.git/
+.idea/
